@@ -1,0 +1,942 @@
+	.version 1.4
+	.target sm_10, map_f64_to_f32
+	// compiled with /usr/local/cuda/open64/lib//be
+	// nvopencc 3.2 built on 2010-11-03
+
+	//-----------------------------------------------------------
+	// Compiling /tmp/tmpxft_00003439_00000000-9_itzSim20130406.cpp3.i (/tmp/ccBI#.GLl2tI)
+	//-----------------------------------------------------------
+
+	//-----------------------------------------------------------
+	// Options:
+	//-----------------------------------------------------------
+	//  Target:ptx, ISA:sm_10, Endian:little, Pointer Size:64
+	//  -O3	(Optimization level)
+	//  -g0	(Debug level)
+	//  -m2	(Report advisories)
+	//-----------------------------------------------------------
+
+	.file	1	"<command-line>"
+	.file	2	"/tmp/tmpxft_00003439_00000000-8_itzSim20130406.cudafe2.gpu"
+	.file	3	"/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h"
+	.file	4	"/usr/local/cuda/bin//../include/crt/device_runtime.h"
+	.file	5	"/usr/local/cuda/bin//../include/host_defines.h"
+	.file	6	"/usr/local/cuda/bin//../include/builtin_types.h"
+	.file	7	"/usr/local/cuda/bin//../include/device_types.h"
+	.file	8	"/usr/local/cuda/bin//../include/driver_types.h"
+	.file	9	"/usr/local/cuda/bin//../include/surface_types.h"
+	.file	10	"/usr/local/cuda/bin//../include/texture_types.h"
+	.file	11	"/usr/local/cuda/bin//../include/vector_types.h"
+	.file	12	"/usr/local/cuda/bin//../include/device_launch_parameters.h"
+	.file	13	"/usr/local/cuda/bin//../include/crt/storage_class.h"
+	.file	14	"/usr/include/x86_64-linux-gnu/bits/types.h"
+	.file	15	"/usr/include/time.h"
+	.file	16	"cudabyexample/common/book.h"
+	.file	17	"itzSim20130406.cu"
+	.file	18	"/usr/local/cuda/bin//../include/common_functions.h"
+	.file	19	"/usr/local/cuda/bin//../include/math_functions.h"
+	.file	20	"/usr/local/cuda/bin//../include/math_constants.h"
+	.file	21	"/usr/local/cuda/bin//../include/device_functions.h"
+	.file	22	"/usr/local/cuda/bin//../include/sm_11_atomic_functions.h"
+	.file	23	"/usr/local/cuda/bin//../include/sm_12_atomic_functions.h"
+	.file	24	"/usr/local/cuda/bin//../include/sm_13_double_functions.h"
+	.file	25	"/usr/local/cuda/bin//../include/sm_20_atomic_functions.h"
+	.file	26	"/usr/local/cuda/bin//../include/sm_20_intrinsics.h"
+	.file	27	"/usr/local/cuda/bin//../include/surface_functions.h"
+	.file	28	"/usr/local/cuda/bin//../include/texture_fetch_functions.h"
+	.file	29	"/usr/local/cuda/bin//../include/math_functions_dbl_ptx1.h"
+
+
+	.entry _Z14float_to_colorPhPKf (
+		.param .u64 __cudaparm__Z14float_to_colorPhPKf_optr,
+		.param .u64 __cudaparm__Z14float_to_colorPhPKf_outSrc)
+	{
+	.reg .u16 %rh<5>;
+	.reg .u32 %r<60>;
+	.reg .u64 %rd<9>;
+	.reg .f32 %f<74>;
+	.reg .pred %p<19>;
+	.loc	16	81	0
+$LDWbegin__Z14float_to_colorPhPKf:
+	.loc	16	87	0
+	cvt.u32.u16 	%r1, %ntid.x;
+	cvt.u32.u16 	%r2, %ctaid.x;
+	mul.lo.u32 	%r3, %r2, %r1;
+	mov.u16 	%rh1, %ctaid.y;
+	mov.u16 	%rh2, %ntid.y;
+	mul.wide.u16 	%r4, %rh1, %rh2;
+	cvt.u32.u16 	%r5, %tid.y;
+	add.u32 	%r6, %r5, %r4;
+	mul.lo.u32 	%r7, %r6, %r1;
+	cvt.u32.u16 	%r8, %tid.x;
+	add.u32 	%r9, %r8, %r3;
+	cvt.u32.u16 	%r10, %nctaid.x;
+	mul.lo.u32 	%r11, %r10, %r7;
+	add.u32 	%r12, %r9, %r11;
+	ld.param.u64 	%rd1, [__cudaparm__Z14float_to_colorPhPKf_outSrc];
+	cvt.s64.s32 	%rd2, %r12;
+	mul.wide.s32 	%rd3, %r12, 4;
+	add.u64 	%rd4, %rd1, %rd3;
+	ld.global.f32 	%f1, [%rd4+0];
+	.loc	16	89	0
+	mov.f32 	%f2, 0f43b40000;     	// 360
+	mul.f32 	%f3, %f1, %f2;
+	cvt.rzi.s32.f32 	%r13, %f3;
+	add.s32 	%r14, %r13, 180;
+	mov.s32 	%r15, 1813430637;
+	mov.s32 	%r16, 0;
+	setp.lt.s32 	%p1, %r14, %r16;
+	abs.s32 	%r17, %r14;
+	mul.hi.u32 	%r18, %r17, %r15;
+	sub.u32 	%r19, %r17, %r18;
+	shr.u32 	%r20, %r19, 1;
+	add.u32 	%r21, %r20, %r18;
+	shr.s32 	%r22, %r21, 8;
+	@%p1 sub.s32 	%r22, %r16, %r22;
+	mov.s32 	%r23, %r22;
+	mul.lo.s32 	%r24, %r23, 360;
+	sub.s32 	%r25, %r14, %r24;
+	.loc	16	98	0
+	add.s32 	%r26, %r25, 120;
+	mov.u32 	%r27, 360;
+	setp.le.s32 	%p2, %r26, %r27;
+	@%p2 bra 	$Lt_0_14338;
+	.loc	16	68	0
+	sub.s32 	%r28, %r25, 240;
+	bra.uni 	$Lt_0_14082;
+$Lt_0_14338:
+	.loc	16	69	0
+	add.s32 	%r29, %r25, 480;
+	mov.s32 	%r30, 0;
+	setp.lt.s32 	%p3, %r26, %r30;
+	selp.s32 	%r28, %r29, %r26, %p3;
+$Lt_0_14082:
+	mov.f32 	%f4, 0f3f000000;     	// 0.5
+	setp.le.f32 	%p4, %f1, %f4;
+	mov.f32 	%f5, 0f40000000;     	// 2
+	mul.f32 	%f6, %f1, %f5;
+	mov.f32 	%f7, 0f3f800000;     	// 1
+	add.f32 	%f8, %f1, %f7;
+	sub.f32 	%f9, %f8, %f1;
+	selp.f32 	%f10, %f6, %f9, %p4;
+	mov.u32 	%r31, 59;
+	setp.gt.s32 	%p5, %r28, %r31;
+	@%p5 bra 	$Lt_0_14594;
+	.loc	16	72	0
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	cvt.rn.f32.s32 	%f13, %r28;
+	sub.f32 	%f14, %f10, %f12;
+	mul.f32 	%f15, %f13, %f14;
+	mov.f32 	%f16, 0f42700000;    	// 60
+	div.full.f32 	%f17, %f15, %f16;
+	add.f32 	%f18, %f12, %f17;
+	mov.f32 	%f19, 0f437f0000;    	// 255
+	mul.f32 	%f20, %f18, %f19;
+	cvt.rzi.u32.f32 	%r32, %f20;
+	bra.uni 	$LDWendi_fdividef_204_5;
+$Lt_0_14594:
+	mov.u32 	%r33, 179;
+	setp.gt.s32 	%p6, %r28, %r33;
+	@%p6 bra 	$Lt_0_15106;
+	.loc	16	74	0
+	mov.f32 	%f21, 0f437f0000;    	// 255
+	mul.f32 	%f22, %f10, %f21;
+	cvt.rzi.u32.f32 	%r32, %f22;
+	bra.uni 	$LDWendi_fdividef_204_5;
+$Lt_0_15106:
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	mov.u32 	%r34, 239;
+	setp.gt.s32 	%p7, %r28, %r34;
+	@%p7 bra 	$Lt_0_15618;
+	.loc	16	76	0
+	mov.s32 	%r35, 240;
+	sub.s32 	%r36, %r35, %r28;
+	cvt.rn.f32.s32 	%f23, %r36;
+	sub.f32 	%f24, %f10, %f12;
+	mul.f32 	%f25, %f23, %f24;
+	mov.f32 	%f26, 0f42700000;    	// 60
+	div.full.f32 	%f27, %f25, %f26;
+	add.f32 	%f28, %f12, %f27;
+	mov.f32 	%f29, 0f437f0000;    	// 255
+	mul.f32 	%f30, %f28, %f29;
+	cvt.rzi.u32.f32 	%r32, %f30;
+	bra.uni 	$LDWendi_fdividef_204_5;
+$Lt_0_15618:
+	.loc	16	77	0
+	mov.f32 	%f31, 0f437f0000;    	// 255
+	mul.f32 	%f32, %f12, %f31;
+	cvt.rzi.u32.f32 	%r32, %f32;
+$LDWendi_fdividef_204_5:
+	.loc	16	98	0
+	mul.lo.s32 	%r37, %r12, 4;
+	cvt.u64.s32 	%rd5, %r37;
+	ld.param.u64 	%rd6, [__cudaparm__Z14float_to_colorPhPKf_optr];
+	add.u64 	%rd7, %rd5, %rd6;
+	st.global.u8 	[%rd7+0], %r32;
+	.loc	16	99	0
+	mov.u32 	%r38, 360;
+	setp.le.s32 	%p8, %r25, %r38;
+	@%p8 bra 	$Lt_0_16386;
+	.loc	16	68	0
+	sub.s32 	%r39, %r25, 360;
+	bra.uni 	$Lt_0_16130;
+$Lt_0_16386:
+	.loc	16	69	0
+	add.s32 	%r40, %r25, 360;
+	mov.s32 	%r41, 0;
+	setp.lt.s32 	%p9, %r25, %r41;
+	selp.s32 	%r39, %r40, %r25, %p9;
+$Lt_0_16130:
+	mov.u32 	%r42, 59;
+	setp.gt.s32 	%p10, %r39, %r42;
+	@%p10 bra 	$Lt_0_16642;
+	.loc	16	72	0
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	cvt.rn.f32.s32 	%f33, %r39;
+	sub.f32 	%f34, %f10, %f12;
+	mul.f32 	%f35, %f33, %f34;
+	mov.f32 	%f36, 0f42700000;    	// 60
+	div.full.f32 	%f37, %f35, %f36;
+	add.f32 	%f38, %f12, %f37;
+	mov.f32 	%f39, 0f437f0000;    	// 255
+	mul.f32 	%f40, %f38, %f39;
+	cvt.rzi.u32.f32 	%r43, %f40;
+	bra.uni 	$LDWendi_fdividef_204_3;
+$Lt_0_16642:
+	mov.u32 	%r44, 179;
+	setp.gt.s32 	%p11, %r39, %r44;
+	@%p11 bra 	$Lt_0_17154;
+	.loc	16	74	0
+	mov.f32 	%f41, 0f437f0000;    	// 255
+	mul.f32 	%f42, %f10, %f41;
+	cvt.rzi.u32.f32 	%r43, %f42;
+	bra.uni 	$LDWendi_fdividef_204_3;
+$Lt_0_17154:
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	mov.u32 	%r45, 239;
+	setp.gt.s32 	%p12, %r39, %r45;
+	@%p12 bra 	$Lt_0_17666;
+	.loc	16	76	0
+	mov.s32 	%r46, 240;
+	sub.s32 	%r47, %r46, %r39;
+	cvt.rn.f32.s32 	%f43, %r47;
+	sub.f32 	%f44, %f10, %f12;
+	mul.f32 	%f45, %f43, %f44;
+	mov.f32 	%f46, 0f42700000;    	// 60
+	div.full.f32 	%f47, %f45, %f46;
+	add.f32 	%f48, %f12, %f47;
+	mov.f32 	%f49, 0f437f0000;    	// 255
+	mul.f32 	%f50, %f48, %f49;
+	cvt.rzi.u32.f32 	%r43, %f50;
+	bra.uni 	$LDWendi_fdividef_204_3;
+$Lt_0_17666:
+	.loc	16	77	0
+	mov.f32 	%f51, 0f437f0000;    	// 255
+	mul.f32 	%f52, %f12, %f51;
+	cvt.rzi.u32.f32 	%r43, %f52;
+$LDWendi_fdividef_204_3:
+	.loc	16	99	0
+	st.global.u8 	[%rd7+1], %r43;
+	.loc	16	100	0
+	sub.s32 	%r48, %r25, 120;
+	mov.u32 	%r49, 360;
+	setp.le.s32 	%p13, %r48, %r49;
+	@%p13 bra 	$Lt_0_18434;
+	.loc	16	68	0
+	sub.s32 	%r50, %r25, 480;
+	bra.uni 	$Lt_0_18178;
+$Lt_0_18434:
+	.loc	16	69	0
+	add.s32 	%r51, %r25, 240;
+	mov.s32 	%r52, 0;
+	setp.lt.s32 	%p14, %r48, %r52;
+	selp.s32 	%r50, %r51, %r48, %p14;
+$Lt_0_18178:
+	mov.u32 	%r53, 59;
+	setp.gt.s32 	%p15, %r50, %r53;
+	@%p15 bra 	$Lt_0_18690;
+	.loc	16	72	0
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	cvt.rn.f32.s32 	%f53, %r50;
+	sub.f32 	%f54, %f10, %f12;
+	mul.f32 	%f55, %f53, %f54;
+	mov.f32 	%f56, 0f42700000;    	// 60
+	div.full.f32 	%f57, %f55, %f56;
+	add.f32 	%f58, %f12, %f57;
+	mov.f32 	%f59, 0f437f0000;    	// 255
+	mul.f32 	%f60, %f58, %f59;
+	cvt.rzi.u32.f32 	%r54, %f60;
+	bra.uni 	$LDWendi_fdividef_204_1;
+$Lt_0_18690:
+	mov.u32 	%r55, 179;
+	setp.gt.s32 	%p16, %r50, %r55;
+	@%p16 bra 	$Lt_0_19202;
+	.loc	16	74	0
+	mov.f32 	%f61, 0f437f0000;    	// 255
+	mul.f32 	%f62, %f10, %f61;
+	cvt.rzi.u32.f32 	%r54, %f62;
+	bra.uni 	$LDWendi_fdividef_204_1;
+$Lt_0_19202:
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	mov.u32 	%r56, 239;
+	setp.gt.s32 	%p17, %r50, %r56;
+	@%p17 bra 	$Lt_0_19714;
+	.loc	16	76	0
+	mov.s32 	%r57, 240;
+	sub.s32 	%r58, %r57, %r50;
+	cvt.rn.f32.s32 	%f63, %r58;
+	sub.f32 	%f64, %f10, %f12;
+	mul.f32 	%f65, %f63, %f64;
+	mov.f32 	%f66, 0f42700000;    	// 60
+	div.full.f32 	%f67, %f65, %f66;
+	add.f32 	%f68, %f12, %f67;
+	mov.f32 	%f69, 0f437f0000;    	// 255
+	mul.f32 	%f70, %f68, %f69;
+	cvt.rzi.u32.f32 	%r54, %f70;
+	bra.uni 	$LDWendi_fdividef_204_1;
+$Lt_0_19714:
+	.loc	16	77	0
+	mov.f32 	%f71, 0f437f0000;    	// 255
+	mul.f32 	%f72, %f12, %f71;
+	cvt.rzi.u32.f32 	%r54, %f72;
+$LDWendi_fdividef_204_1:
+	.loc	16	100	0
+	st.global.u8 	[%rd7+2], %r54;
+	.loc	16	101	0
+	mov.u16 	%rh3, 255;
+	st.global.u8 	[%rd7+3], %rh3;
+	.loc	16	102	0
+	exit;
+$LDWend__Z14float_to_colorPhPKf:
+	} // _Z14float_to_colorPhPKf
+
+	.entry _Z14float_to_colorP6uchar4PKf (
+		.param .u64 __cudaparm__Z14float_to_colorP6uchar4PKf_optr,
+		.param .u64 __cudaparm__Z14float_to_colorP6uchar4PKf_outSrc)
+	{
+	.reg .u16 %rh<4>;
+	.reg .u32 %r<60>;
+	.reg .u64 %rd<8>;
+	.reg .f32 %f<74>;
+	.reg .pred %p<19>;
+	.loc	16	105	0
+$LDWbegin__Z14float_to_colorP6uchar4PKf:
+	.loc	16	111	0
+	cvt.u32.u16 	%r1, %ntid.x;
+	cvt.u32.u16 	%r2, %ctaid.x;
+	mul.lo.u32 	%r3, %r2, %r1;
+	mov.u16 	%rh1, %ctaid.y;
+	mov.u16 	%rh2, %ntid.y;
+	mul.wide.u16 	%r4, %rh1, %rh2;
+	cvt.u32.u16 	%r5, %tid.y;
+	add.u32 	%r6, %r5, %r4;
+	mul.lo.u32 	%r7, %r6, %r1;
+	cvt.u32.u16 	%r8, %tid.x;
+	add.u32 	%r9, %r8, %r3;
+	cvt.u32.u16 	%r10, %nctaid.x;
+	mul.lo.u32 	%r11, %r10, %r7;
+	add.u32 	%r12, %r9, %r11;
+	cvt.s64.s32 	%rd1, %r12;
+	mul.wide.s32 	%rd2, %r12, 4;
+	ld.param.u64 	%rd3, [__cudaparm__Z14float_to_colorP6uchar4PKf_outSrc];
+	add.u64 	%rd4, %rd3, %rd2;
+	ld.global.f32 	%f1, [%rd4+0];
+	.loc	16	113	0
+	mov.f32 	%f2, 0f43b40000;     	// 360
+	mul.f32 	%f3, %f1, %f2;
+	cvt.rzi.s32.f32 	%r13, %f3;
+	add.s32 	%r14, %r13, 180;
+	mov.s32 	%r15, 1813430637;
+	mov.s32 	%r16, 0;
+	setp.lt.s32 	%p1, %r14, %r16;
+	abs.s32 	%r17, %r14;
+	mul.hi.u32 	%r18, %r17, %r15;
+	sub.u32 	%r19, %r17, %r18;
+	shr.u32 	%r20, %r19, 1;
+	add.u32 	%r21, %r20, %r18;
+	shr.s32 	%r22, %r21, 8;
+	@%p1 sub.s32 	%r22, %r16, %r22;
+	mov.s32 	%r23, %r22;
+	mul.lo.s32 	%r24, %r23, 360;
+	sub.s32 	%r25, %r14, %r24;
+	.loc	16	122	0
+	add.s32 	%r26, %r25, 120;
+	mov.u32 	%r27, 360;
+	setp.le.s32 	%p2, %r26, %r27;
+	@%p2 bra 	$Lt_1_14338;
+	.loc	16	68	0
+	sub.s32 	%r28, %r25, 240;
+	bra.uni 	$Lt_1_14082;
+$Lt_1_14338:
+	.loc	16	69	0
+	add.s32 	%r29, %r25, 480;
+	mov.s32 	%r30, 0;
+	setp.lt.s32 	%p3, %r26, %r30;
+	selp.s32 	%r28, %r29, %r26, %p3;
+$Lt_1_14082:
+	mov.f32 	%f4, 0f3f000000;     	// 0.5
+	setp.le.f32 	%p4, %f1, %f4;
+	mov.f32 	%f5, 0f40000000;     	// 2
+	mul.f32 	%f6, %f1, %f5;
+	mov.f32 	%f7, 0f3f800000;     	// 1
+	add.f32 	%f8, %f1, %f7;
+	sub.f32 	%f9, %f8, %f1;
+	selp.f32 	%f10, %f6, %f9, %p4;
+	mov.u32 	%r31, 59;
+	setp.gt.s32 	%p5, %r28, %r31;
+	@%p5 bra 	$Lt_1_14594;
+	.loc	16	72	0
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	cvt.rn.f32.s32 	%f13, %r28;
+	sub.f32 	%f14, %f10, %f12;
+	mul.f32 	%f15, %f13, %f14;
+	mov.f32 	%f16, 0f42700000;    	// 60
+	div.full.f32 	%f17, %f15, %f16;
+	add.f32 	%f18, %f12, %f17;
+	mov.f32 	%f19, 0f437f0000;    	// 255
+	mul.f32 	%f20, %f18, %f19;
+	cvt.rzi.u32.f32 	%r32, %f20;
+	bra.uni 	$LDWendi_fdividef_205_5;
+$Lt_1_14594:
+	mov.u32 	%r33, 179;
+	setp.gt.s32 	%p6, %r28, %r33;
+	@%p6 bra 	$Lt_1_15106;
+	.loc	16	74	0
+	mov.f32 	%f21, 0f437f0000;    	// 255
+	mul.f32 	%f22, %f10, %f21;
+	cvt.rzi.u32.f32 	%r32, %f22;
+	bra.uni 	$LDWendi_fdividef_205_5;
+$Lt_1_15106:
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	mov.u32 	%r34, 239;
+	setp.gt.s32 	%p7, %r28, %r34;
+	@%p7 bra 	$Lt_1_15618;
+	.loc	16	76	0
+	mov.s32 	%r35, 240;
+	sub.s32 	%r36, %r35, %r28;
+	cvt.rn.f32.s32 	%f23, %r36;
+	sub.f32 	%f24, %f10, %f12;
+	mul.f32 	%f25, %f23, %f24;
+	mov.f32 	%f26, 0f42700000;    	// 60
+	div.full.f32 	%f27, %f25, %f26;
+	add.f32 	%f28, %f12, %f27;
+	mov.f32 	%f29, 0f437f0000;    	// 255
+	mul.f32 	%f30, %f28, %f29;
+	cvt.rzi.u32.f32 	%r32, %f30;
+	bra.uni 	$LDWendi_fdividef_205_5;
+$Lt_1_15618:
+	.loc	16	77	0
+	mov.f32 	%f31, 0f437f0000;    	// 255
+	mul.f32 	%f32, %f12, %f31;
+	cvt.rzi.u32.f32 	%r32, %f32;
+$LDWendi_fdividef_205_5:
+	.loc	16	122	0
+	ld.param.u64 	%rd5, [__cudaparm__Z14float_to_colorP6uchar4PKf_optr];
+	add.u64 	%rd6, %rd5, %rd2;
+	st.global.u8 	[%rd6+0], %r32;
+	.loc	16	123	0
+	mov.u32 	%r37, 360;
+	setp.le.s32 	%p8, %r25, %r37;
+	@%p8 bra 	$Lt_1_16386;
+	.loc	16	68	0
+	sub.s32 	%r38, %r25, 360;
+	bra.uni 	$Lt_1_16130;
+$Lt_1_16386:
+	.loc	16	69	0
+	add.s32 	%r39, %r25, 360;
+	mov.s32 	%r40, 0;
+	setp.lt.s32 	%p9, %r25, %r40;
+	selp.s32 	%r38, %r39, %r25, %p9;
+$Lt_1_16130:
+	mov.u32 	%r41, 59;
+	setp.gt.s32 	%p10, %r38, %r41;
+	@%p10 bra 	$Lt_1_16642;
+	.loc	16	72	0
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	cvt.rn.f32.s32 	%f33, %r38;
+	sub.f32 	%f34, %f10, %f12;
+	mul.f32 	%f35, %f33, %f34;
+	mov.f32 	%f36, 0f42700000;    	// 60
+	div.full.f32 	%f37, %f35, %f36;
+	add.f32 	%f38, %f12, %f37;
+	mov.f32 	%f39, 0f437f0000;    	// 255
+	mul.f32 	%f40, %f38, %f39;
+	cvt.rzi.u32.f32 	%r42, %f40;
+	bra.uni 	$LDWendi_fdividef_205_3;
+$Lt_1_16642:
+	mov.u32 	%r43, 179;
+	setp.gt.s32 	%p11, %r38, %r43;
+	@%p11 bra 	$Lt_1_17154;
+	.loc	16	74	0
+	mov.f32 	%f41, 0f437f0000;    	// 255
+	mul.f32 	%f42, %f10, %f41;
+	cvt.rzi.u32.f32 	%r42, %f42;
+	bra.uni 	$LDWendi_fdividef_205_3;
+$Lt_1_17154:
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	mov.u32 	%r44, 239;
+	setp.gt.s32 	%p12, %r38, %r44;
+	@%p12 bra 	$Lt_1_17666;
+	.loc	16	76	0
+	mov.s32 	%r45, 240;
+	sub.s32 	%r46, %r45, %r38;
+	cvt.rn.f32.s32 	%f43, %r46;
+	sub.f32 	%f44, %f10, %f12;
+	mul.f32 	%f45, %f43, %f44;
+	mov.f32 	%f46, 0f42700000;    	// 60
+	div.full.f32 	%f47, %f45, %f46;
+	add.f32 	%f48, %f12, %f47;
+	mov.f32 	%f49, 0f437f0000;    	// 255
+	mul.f32 	%f50, %f48, %f49;
+	cvt.rzi.u32.f32 	%r42, %f50;
+	bra.uni 	$LDWendi_fdividef_205_3;
+$Lt_1_17666:
+	.loc	16	77	0
+	mov.f32 	%f51, 0f437f0000;    	// 255
+	mul.f32 	%f52, %f12, %f51;
+	cvt.rzi.u32.f32 	%r42, %f52;
+$LDWendi_fdividef_205_3:
+	.loc	16	123	0
+	st.global.u8 	[%rd6+1], %r42;
+	.loc	16	124	0
+	sub.s32 	%r47, %r25, 120;
+	mov.u32 	%r48, 360;
+	setp.le.s32 	%p13, %r47, %r48;
+	@%p13 bra 	$Lt_1_18434;
+	.loc	16	68	0
+	sub.s32 	%r49, %r25, 480;
+	bra.uni 	$Lt_1_18178;
+$Lt_1_18434:
+	.loc	16	69	0
+	add.s32 	%r50, %r25, 240;
+	mov.s32 	%r51, 0;
+	setp.lt.s32 	%p14, %r47, %r51;
+	selp.s32 	%r49, %r50, %r47, %p14;
+$Lt_1_18178:
+	mov.u32 	%r52, 59;
+	setp.gt.s32 	%p15, %r49, %r52;
+	@%p15 bra 	$Lt_1_18690;
+	.loc	16	72	0
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	cvt.rn.f32.s32 	%f53, %r49;
+	sub.f32 	%f54, %f10, %f12;
+	mul.f32 	%f55, %f53, %f54;
+	mov.f32 	%f56, 0f42700000;    	// 60
+	div.full.f32 	%f57, %f55, %f56;
+	add.f32 	%f58, %f12, %f57;
+	mov.f32 	%f59, 0f437f0000;    	// 255
+	mul.f32 	%f60, %f58, %f59;
+	cvt.rzi.u32.f32 	%r53, %f60;
+	bra.uni 	$LDWendi_fdividef_205_1;
+$Lt_1_18690:
+	mov.u32 	%r54, 179;
+	setp.gt.s32 	%p16, %r49, %r54;
+	@%p16 bra 	$Lt_1_19202;
+	.loc	16	74	0
+	mov.f32 	%f61, 0f437f0000;    	// 255
+	mul.f32 	%f62, %f10, %f61;
+	cvt.rzi.u32.f32 	%r53, %f62;
+	bra.uni 	$LDWendi_fdividef_205_1;
+$Lt_1_19202:
+	add.f32 	%f11, %f1, %f1;
+	sub.f32 	%f12, %f11, %f10;
+	mov.u32 	%r55, 239;
+	setp.gt.s32 	%p17, %r49, %r55;
+	@%p17 bra 	$Lt_1_19714;
+	.loc	16	76	0
+	mov.s32 	%r56, 240;
+	sub.s32 	%r57, %r56, %r49;
+	cvt.rn.f32.s32 	%f63, %r57;
+	sub.f32 	%f64, %f10, %f12;
+	mul.f32 	%f65, %f63, %f64;
+	mov.f32 	%f66, 0f42700000;    	// 60
+	div.full.f32 	%f67, %f65, %f66;
+	add.f32 	%f68, %f12, %f67;
+	mov.f32 	%f69, 0f437f0000;    	// 255
+	mul.f32 	%f70, %f68, %f69;
+	cvt.rzi.u32.f32 	%r53, %f70;
+	bra.uni 	$LDWendi_fdividef_205_1;
+$Lt_1_19714:
+	.loc	16	77	0
+	mov.f32 	%f71, 0f437f0000;    	// 255
+	mul.f32 	%f72, %f12, %f71;
+	cvt.rzi.u32.f32 	%r53, %f72;
+$LDWendi_fdividef_205_1:
+	.loc	16	125	0
+	mov.u32 	%r58, 255;
+	st.global.v2.u8 	[%rd6+2], {%r53,%r58};
+	.loc	16	126	0
+	exit;
+$LDWend__Z14float_to_colorP6uchar4PKf:
+	} // _Z14float_to_colorP6uchar4PKf
+
+	.entry _Z4testPf (
+		.param .u64 __cudaparm__Z4testPf_I)
+	{
+	.reg .u16 %rh<4>;
+	.reg .u32 %r<5>;
+	.reg .u64 %rd<6>;
+	.reg .f32 %f<3>;
+	.loc	17	15	0
+$LDWbegin__Z4testPf:
+	.loc	17	19	0
+	mov.f32 	%f1, 0f00000000;     	// 0
+	ld.param.u64 	%rd1, [__cudaparm__Z4testPf_I];
+	cvt.u32.u16 	%r1, %tid.x;
+	mov.u16 	%rh1, %ctaid.x;
+	mov.u16 	%rh2, %ntid.x;
+	mul.wide.u16 	%r2, %rh1, %rh2;
+	add.u32 	%r3, %r1, %r2;
+	cvt.s64.s32 	%rd2, %r3;
+	mul.wide.s32 	%rd3, %r3, 4;
+	add.u64 	%rd4, %rd1, %rd3;
+	st.global.f32 	[%rd4+0], %f1;
+	.loc	17	20	0
+	exit;
+$LDWend__Z4testPf:
+	} // _Z4testPf
+
+	.entry _Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0_ (
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__spikeNeuron,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__nrnPreIndexArray,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__nrnPostIndexArray,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__postSynapseList,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__axonState,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__axonDelay,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__synapseState,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__I,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__v,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__u,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__a,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__d,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__dt,
+		.param .u64 __cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__time)
+	{
+	.reg .u16 %rh<4>;
+	.reg .u32 %r<16>;
+	.reg .u64 %rd<35>;
+	.reg .f32 %f<26>;
+	.reg .f64 %fd<38>;
+	.reg .pred %p<9>;
+	.loc	17	23	0
+$LDWbegin__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0_:
+	.loc	17	47	0
+	mov.u16 	%rh1, %ctaid.x;
+	mov.u16 	%rh2, %ntid.x;
+	mul.wide.u16 	%r1, %rh1, %rh2;
+	cvt.u32.u16 	%r2, %tid.x;
+	add.u32 	%r3, %r2, %r1;
+	cvt.s64.s32 	%rd1, %r3;
+	mul.wide.s32 	%rd2, %r3, 4;
+	ld.param.u64 	%rd3, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__v];
+	add.u64 	%rd4, %rd3, %rd2;
+	ld.global.f32 	%f1, [%rd4+0];
+	mov.f32 	%f2, 0f42480000;     	// 50
+	sub.f32 	%f3, %f2, %f1;
+	ld.param.u64 	%rd5, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__I];
+	add.u64 	%rd6, %rd5, %rd2;
+	ld.global.f32 	%f4, [%rd6+0];
+	mul.f32 	%f5, %f4, %f3;
+	.loc	17	50	0
+	ld.param.u64 	%rd7, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__nrnPreIndexArray];
+	add.u64 	%rd8, %rd7, %rd2;
+	ld.global.s32 	%r4, [%rd8+0];
+	ld.global.s32 	%r5, [%rd8+4];
+	setp.le.s32 	%p1, %r5, %r4;
+	@%p1 bra 	$Lt_3_4610;
+	sub.s32 	%r6, %r5, %r4;
+	ld.param.u64 	%rd9, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__synapseState];
+	cvt.s64.s32 	%rd10, %r4;
+	mul.wide.s32 	%rd11, %r4, 4;
+	add.u64 	%rd12, %rd9, %rd11;
+	mov.s32 	%r7, %r6;
+$Lt_3_5122:
+ //<loop> Loop body line 50, nesting depth: 1, estimated iterations: unknown
+	ld.global.f32 	%f6, [%rd12+0];
+	mov.f32 	%f7, 0f00000000;     	// 0
+	setp.gt.f32 	%p2, %f6, %f7;
+	@!%p2 bra 	$Lt_3_5634;
+ //<loop> Part of loop body line 50, head labeled $Lt_3_5122
+	.loc	17	52	0
+	mad.f32 	%f5, %f6, %f3, %f5;
+	bra.uni 	$Lt_3_5378;
+$Lt_3_5634:
+ //<loop> Part of loop body line 50, head labeled $Lt_3_5122
+	mov.f32 	%f8, 0f00000000;     	// 0
+	setp.lt.f32 	%p3, %f6, %f8;
+	@!%p3 bra 	$Lt_3_5890;
+ //<loop> Part of loop body line 50, head labeled $Lt_3_5122
+	.loc	17	55	0
+	mov.f32 	%f9, 0fc2960000;     	// -75
+	sub.f32 	%f10, %f9, %f1;
+	mul.f32 	%f11, %f6, %f10;
+	sub.f32 	%f5, %f5, %f11;
+$Lt_3_5890:
+$Lt_3_5378:
+ //<loop> Part of loop body line 50, head labeled $Lt_3_5122
+	add.s32 	%r4, %r4, 1;
+	add.u64 	%rd12, %rd12, 4;
+	setp.ne.s32 	%p4, %r5, %r4;
+	@%p4 bra 	$Lt_3_5122;
+$Lt_3_4610:
+	.loc	17	63	0
+	cvt.f64.f32 	%fd1, %f5;
+	ld.param.u64 	%rd13, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__u];
+	add.u64 	%rd14, %rd13, %rd2;
+	cvt.f64.f32 	%fd2, %f1;
+	ld.param.u64 	%rd15, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__dt];
+	mov.f64 	%fd3, 0d4061800000000000;	// 140
+	mov.f64 	%fd4, 0d4014000000000000;	// 5
+	mov.f64 	%fd5, 0d3fa47ae147ae147b;	// 0.04
+	mad.rn.f64 	%fd6, %fd2, %fd5, %fd4;
+	mad.rn.f64 	%fd7, %fd2, %fd6, %fd3;
+	ld.global.f32 	%f12, [%rd14+0];
+	cvt.f64.f32 	%fd8, %f12;
+	sub.f64 	%fd9, %fd7, %fd8;
+	add.f64 	%fd10, %fd1, %fd9;
+	ld.global.f32 	%f13, [%rd15+0];
+	cvt.f64.f32 	%fd11, %f13;
+	mov.f64 	%fd12, 0d3fe0000000000000;	// 0.5
+	mul.f64 	%fd13, %fd11, %fd12;
+	mad.rn.f64 	%fd14, %fd10, %fd13, %fd2;
+	cvt.rn.f32.f64 	%f14, %fd14;
+	st.global.f32 	[%rd4+0], %f14;
+	.loc	17	64	0
+	cvt.f64.f32 	%fd15, %f14;
+	mov.f64 	%fd16, 0d4061800000000000;	// 140
+	mov.f64 	%fd17, 0d4014000000000000;	// 5
+	mov.f64 	%fd18, 0d3fa47ae147ae147b;	// 0.04
+	mad.rn.f64 	%fd19, %fd15, %fd18, %fd17;
+	mad.rn.f64 	%fd20, %fd15, %fd19, %fd16;
+	ld.global.f32 	%f15, [%rd14+0];
+	cvt.f64.f32 	%fd21, %f15;
+	sub.f64 	%fd22, %fd20, %fd21;
+	add.f64 	%fd23, %fd1, %fd22;
+	ld.global.f32 	%f16, [%rd15+0];
+	cvt.f64.f32 	%fd24, %f16;
+	mov.f64 	%fd25, 0d3fe0000000000000;	// 0.5
+	mul.f64 	%fd26, %fd24, %fd25;
+	mad.rn.f64 	%fd27, %fd23, %fd26, %fd15;
+	cvt.rn.f32.f64 	%f1, %fd27;
+	st.global.f32 	[%rd4+0], %f1;
+	.loc	17	65	0
+	ld.global.f32 	%f17, [%rd14+0];
+	cvt.f64.f32 	%fd28, %f17;
+	ld.param.u64 	%rd16, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__a];
+	add.u64 	%rd17, %rd16, %rd2;
+	ld.global.f32 	%f18, [%rd17+0];
+	cvt.f64.f32 	%fd29, %f18;
+	cvt.f64.f32 	%fd30, %f1;
+	mov.f64 	%fd31, 0d3fc999999999999a;	// 0.2
+	mul.f64 	%fd32, %fd30, %fd31;
+	sub.f64 	%fd33, %fd32, %fd28;
+	mad.rn.f64 	%fd34, %fd29, %fd33, %fd28;
+	cvt.rn.f32.f64 	%f19, %fd34;
+	st.global.f32 	[%rd14+0], %f19;
+	.loc	17	69	0
+	ld.param.u64 	%rd18, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__spikeNeuron];
+	add.u64 	%rd19, %rd18, %rd2;
+	mov.s32 	%r8, 0;
+	st.global.s32 	[%rd19+0], %r8;
+	ld.global.f32 	%f20, [%rd4+0];
+	cvt.f64.f32 	%fd35, %f20;
+	mov.f64 	%fd36, 0d4044000000000000;	// 40
+	setp.gt.f64 	%p5, %fd35, %fd36;
+	@!%p5 bra 	$Lt_3_6658;
+	.loc	17	71	0
+	mov.f32 	%f21, 0fc2820000;    	// -65
+	st.global.f32 	[%rd4+0], %f21;
+	.loc	17	72	0
+	ld.global.f32 	%f22, [%rd14+0];
+	ld.param.u64 	%rd20, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__d];
+	add.u64 	%rd21, %rd20, %rd2;
+	ld.global.f32 	%f23, [%rd21+0];
+	add.f32 	%f24, %f22, %f23;
+	st.global.f32 	[%rd14+0], %f24;
+	.loc	17	73	0
+	mov.s32 	%r9, 1;
+	st.global.s32 	[%rd19+0], %r9;
+	.loc	17	74	0
+	ld.param.u64 	%rd22, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__nrnPostIndexArray];
+	add.u64 	%rd23, %rd22, %rd2;
+	ld.global.s32 	%r10, [%rd23+0];
+	ld.global.s32 	%r11, [%rd23+4];
+	setp.le.s32 	%p6, %r11, %r10;
+	@%p6 bra 	$Lt_3_7170;
+	ld.param.u64 	%rd24, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__postSynapseList];
+	cvt.s64.s32 	%rd25, %r10;
+	mul.wide.s32 	%rd26, %r10, 4;
+	add.u64 	%rd27, %rd24, %rd26;
+	ld.param.u64 	%rd28, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__axonState];
+	ld.param.u64 	%rd29, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__axonDelay];
+$Lt_3_7682:
+ //<loop> Loop body line 74, nesting depth: 1, estimated iterations: unknown
+	.loc	17	75	0
+	ld.global.s32 	%r12, [%rd27+0];
+	cvt.s64.s32 	%rd30, %r12;
+	mul.wide.s32 	%rd31, %r12, 4;
+	.loc	17	74	0
+	ld.param.u64 	%rd29, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__axonDelay];
+	.loc	17	75	0
+	add.u64 	%rd32, %rd31, %rd29;
+	ld.global.s32 	%r13, [%rd32+0];
+	.loc	17	74	0
+	ld.param.u64 	%rd28, [__cudaparm__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0__axonState];
+	.loc	17	75	0
+	add.u64 	%rd33, %rd31, %rd28;
+	st.global.s32 	[%rd33+0], %r13;
+	.loc	17	74	0
+	add.s32 	%r10, %r10, 1;
+	add.u64 	%rd27, %rd27, 4;
+	ld.global.s32 	%r14, [%rd23+4];
+	setp.gt.s32 	%p7, %r14, %r10;
+	@%p7 bra 	$Lt_3_7682;
+$Lt_3_7170:
+$Lt_3_6658:
+	.loc	17	83	0
+	exit;
+$LDWend__Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0_:
+	} // _Z17updateNeuronStatePiS_S_S_S_S_PfS0_S0_S0_S0_S0_S0_S0_
+
+	.entry _Z19updateSynapticStatePiS_PfS0_S_S0_ (
+		.param .u64 __cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__connectionsPerThread,
+		.param .u64 __cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__nConnections,
+		.param .u64 __cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0____val_paramsynapseState,
+		.param .u64 __cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__tau,
+		.param .u64 __cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__axonState,
+		.param .u64 __cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__synapseWeight)
+	{
+	.reg .u16 %rh<4>;
+	.reg .u32 %r<17>;
+	.reg .u64 %rd<14>;
+	.reg .f32 %f<10>;
+	.reg .f64 %fd<5>;
+	.reg .pred %p<11>;
+	.loc	17	87	0
+$LDWbegin__Z19updateSynapticStatePiS_PfS0_S_S0_:
+	ld.param.u64 	%rd1, [__cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0____val_paramsynapseState];
+	.loc	17	103	0
+	ld.param.u64 	%rd2, [__cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__connectionsPerThread];
+	ld.global.s32 	%r1, [%rd2+0];
+	mov.u16 	%rh1, %ctaid.x;
+	mov.u16 	%rh2, %ntid.x;
+	mul.wide.u16 	%r2, %rh1, %rh2;
+	cvt.u32.u16 	%r3, %tid.x;
+	add.u32 	%r4, %r3, %r2;
+	mul.lo.s32 	%r5, %r1, %r4;
+	add.s32 	%r6, %r4, 1;
+	mul.lo.s32 	%r7, %r1, %r6;
+	setp.le.s32 	%p1, %r7, %r5;
+	@%p1 bra 	$Lt_4_6658;
+	ld.param.u64 	%rd3, [__cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__nConnections];
+$Lt_4_7170:
+ //<loop> Loop body line 103, nesting depth: 1, estimated iterations: unknown
+	ld.param.u64 	%rd3, [__cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__nConnections];
+	ld.global.s32 	%r8, [%rd3+0];
+	setp.le.s32 	%p2, %r8, %r5;
+	@%p2 bra 	$Lt_4_7426;
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	cvt.s64.s32 	%rd4, %r5;
+	mul.wide.s32 	%rd5, %r5, 4;
+	add.u64 	%rd6, %rd5, %rd1;
+	ld.global.f32 	%f1, [%rd6+0];
+	mov.f32 	%f2, 0f00000000;     	// 0
+	setp.neu.f32 	%p3, %f1, %f2;
+	@!%p3 bra 	$Lt_4_8194;
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	.loc	17	111	0
+	ld.param.u64 	%rd7, [__cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__tau];
+	add.u64 	%rd8, %rd7, %rd5;
+	ld.global.f32 	%f3, [%rd8+0];
+	mul.f32 	%f4, %f3, %f1;
+	sub.f32 	%f5, %f1, %f4;
+	st.global.f32 	[%rd6+0], %f5;
+	bra.uni 	$Lt_4_10498;
+$Lt_4_8194:
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	.loc	17	113	0
+	cvt.f64.f32 	%fd1, %f1;
+	mov.f64 	%fd2, 0dbf1a36e2eb1c432d;	// -0.0001
+	setp.gt.f64 	%p4, %fd1, %fd2;
+	@!%p4 bra 	$Lt_4_10498;
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	mov.f64 	%fd3, 0dbf1a36e2eb1c432d;	// -0.0001
+	setp.lt.f64 	%p5, %fd1, %fd3;
+	@!%p5 bra 	$Lt_4_10498;
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	mov.u64 	%rd1, 0;
+$Lt_4_10498:
+$L_4_6146:
+$Lt_4_7938:
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	.loc	17	115	0
+	ld.param.u64 	%rd9, [__cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__axonState];
+	add.u64 	%rd10, %rd9, %rd5;
+	ld.global.s32 	%r9, [%rd10+0];
+	mov.u32 	%r10, 1;
+	setp.le.s32 	%p6, %r9, %r10;
+	@%p6 bra 	$Lt_4_8706;
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	.loc	17	119	0
+	sub.s32 	%r11, %r9, 1;
+	st.global.s32 	[%rd10+0], %r11;
+	bra.uni 	$Lt_4_9474;
+$Lt_4_8706:
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	mov.u32 	%r12, 1;
+	setp.ne.s32 	%p7, %r9, %r12;
+	@%p7 bra 	$Lt_4_9218;
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	.loc	17	122	0
+	sub.s32 	%r13, %r9, 1;
+	st.global.s32 	[%rd10+0], %r13;
+	.loc	17	123	0
+	add.u64 	%rd6, %rd5, %rd1;
+	ld.global.f32 	%f6, [%rd6+0];
+	ld.param.u64 	%rd11, [__cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__synapseWeight];
+	add.u64 	%rd12, %rd11, %rd5;
+	ld.global.f32 	%f7, [%rd12+0];
+	add.f32 	%f8, %f6, %f7;
+	st.global.f32 	[%rd6+0], %f8;
+	bra.uni 	$Lt_4_9474;
+$Lt_4_9218:
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	mov.u32 	%r14, 0;
+	setp.ge.s32 	%p8, %r9, %r14;
+	@%p8 bra 	$Lt_4_9474;
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	.loc	17	126	0
+	mov.s32 	%r15, 0;
+	st.global.s32 	[%rd10+0], %r15;
+$Lt_4_9474:
+$Lt_4_8962:
+$Lt_4_8450:
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	.loc	17	103	0
+	ld.param.u64 	%rd2, [__cudaparm__Z19updateSynapticStatePiS_PfS0_S_S0__connectionsPerThread];
+	.loc	17	126	0
+	ld.global.s32 	%r1, [%rd2+0];
+	mul.lo.s32 	%r7, %r1, %r6;
+$Lt_4_7426:
+ //<loop> Part of loop body line 103, head labeled $Lt_4_7170
+	.loc	17	103	0
+	add.s32 	%r5, %r5, 1;
+	setp.gt.s32 	%p9, %r7, %r5;
+	@%p9 bra 	$Lt_4_7170;
+$Lt_4_6658:
+	.loc	17	133	0
+	exit;
+$LDWend__Z19updateSynapticStatePiS_PfS0_S_S0_:
+	} // _Z19updateSynapticStatePiS_PfS0_S_S0_
+
